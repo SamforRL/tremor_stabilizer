@@ -1,0 +1,190 @@
+{
+  "benchmark": "system benchmark phase 2A; phase1 physics/trajectory frozen",
+  "model": "models/system_benchmark_spoon.xml",
+  "phase1_config_sha256": "33226b6f44d260be809d7adac3798ad1a697f7bd51085896480dee8a0823a59e",
+  "phase1_configuration_snapshot": {
+    "model": "models/system_benchmark_spoon.xml",
+    "same_2dof_topology": true,
+    "step_s": 0.001,
+    "logging_hz": 100.0,
+    "duration_s": 12.0,
+    "phases": {
+      "hold": [
+        0,
+        1
+      ],
+      "lift": [
+        1,
+        3
+      ],
+      "transport": [
+        3,
+        7
+      ],
+      "approach": [
+        7,
+        9
+      ],
+      "intentional_unload": [
+        9,
+        11
+      ],
+      "unload_hold": [
+        11,
+        12
+      ]
+    },
+    "trajectory": {
+      "lift_m": 0.14,
+      "transport_x_m": 0.2,
+      "approach_x_m": 0.024,
+      "unload_pitch_rad": 0.95,
+      "profile": "minimum jerk"
+    },
+    "particles": {
+      "count": 30,
+      "shape": "identical rigid spheres",
+      "radius_m": 0.0032,
+      "mass_kg": 0.00015,
+      "initial_layout": "6 by 5"
+    },
+    "bowl_collision_proxy": "shallow tray with floor and four short walls; CAD meshes remain visual",
+    "target_cup": {
+      "center_m": [
+        0.34,
+        0,
+        0
+      ],
+      "inner_half_width_m": 0.06
+    },
+    "tremor": {
+      "table": "p03_2",
+      "start_s": 15,
+      "band_hz": [
+        3,
+        12
+      ],
+      "mapping": {
+        "gyro_X": "roll rate",
+        "gyro_Y": "pitch rate"
+      },
+      "input_units": "deg/s in processed NPZ; converted to rad/s before integration",
+      "rate_rms_rad_s": [
+        0.2773323075397259,
+        0.2754999114487497
+      ],
+      "severity_scale": {
+        "mild": 2,
+        "medium": 4,
+        "severe": 6
+      },
+      "medium": 4,
+      "source_file": "data/processed/pinheiro_p03_2_lumbrical_gyro.npz",
+      "source_sha256": "6da3151078341106253d89d7c64948bcce1f527621703c2df594cfa5dfda8b90",
+      "rate_to_angle": "trapezoidal integration after deg/s to rad/s; finite-window drift removed"
+    },
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "oracle": "exact injected angle subtracted; same IK and torque controller",
+    "no_comp": "zero estimate; inferred intent follows observed handle; neutral joint reference"
+  },
+  "duration_s": 12.0,
+  "physics_dt_s": 0.001,
+  "controller_hz": 1000,
+  "estimator_sample_rate_hz": 148.14814814814252,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "methods": [
+    "NoComp",
+    "FixedBPF",
+    "ABPF",
+    "OriginalBMFLC",
+    "HuberBMFLC",
+    "Oracle"
+  ],
+  "alpha": 4.0,
+  "source": {
+    "table": "p03_2",
+    "start_s": 15.0,
+    "band_hz": [
+      3.0,
+      12.0
+    ],
+    "channels": [
+      "LLUMBRICALGyroX5IMdegsec",
+      "LLUMBRICALGyroY5IMdegsec"
+    ],
+    "mapping": {
+      "gyro_X": "roll",
+      "gyro_Y": "pitch"
+    },
+    "sha256": "6da3151078341106253d89d7c64948bcce1f527621703c2df594cfa5dfda8b90",
+    "proxy_signal_is_not_independent_physiological_ground_truth": true
+  },
+  "measurement": "voluntary roll/pitch Euler rates plus alpha-scaled drift-corrected proxy rates; deg/s",
+  "estimator_output": "angular velocity deg/s; held between native sensor samples",
+  "integration": "causal trapezoidal integration at controller rate; common initial angle anchor from phase1 injected proxy at t=0; no post-hoc alignment",
+  "fixed_bpf": {
+    "order": 4,
+    "low_hz": 3.0,
+    "high_hz": 12.0
+  },
+  "abpf": {
+    "modal_frequency_hz_from_raw_0_15s": [
+      4.600460046004426,
+      8.53418675200821
+    ],
+    "frequency_step_hz": 0.1,
+    "limit_offset_hz": 1.5
+  },
+  "bmflc": {
+    "frequency_band_hz": [
+      3.0,
+      12.0
+    ],
+    "spacing_hz": 0.1,
+    "lms_gain": 0.01,
+    "bias_included_but_excluded_from_tremor_output": true
+  },
+  "huber": {
+    "delta_deg_s": [
+      8.879846408679843,
+      9.820875286357424
+    ],
+    "rule": "0.5 times per-axis raw 3-12 Hz RMS from independent 0-15 s calibration"
+  },
+  "controller": {
+    "kp": [
+      5.0,
+      5.0
+    ],
+    "kd": [
+      0.008,
+      0.008
+    ],
+    "torque_limit_Nm": 0.15
+  },
+  "angle_convention": "same initial angle offset and trapezoidal rate-to-angle integrator for all compensating methods and Oracle; NoComp estimate is zero",
+  "rendering": "fixed-camera side-projection animation, matching phase1 batch visualization; interactive CAD model is available via gimbal.system_benchmark_viewer",
+  "representative_seed_no_comp_median_retention": 1
+}

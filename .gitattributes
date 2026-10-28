@@ -1,0 +1,2 @@
+# Preserve frozen snapshot byte hashes across platforms.
+* -text

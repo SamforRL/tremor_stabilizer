@@ -1,0 +1,314 @@
+{
+  "protocol": "corrected_scoop_estimators_v1",
+  "alpha": 5.0,
+  "source": {
+    "table": "p03_2",
+    "start_s": 15.0,
+    "duration_s": 21.0,
+    "band_hz": [
+      3.0,
+      12.0
+    ],
+    "channels": [
+      "LLUMBRICALGyroX5IMdegsec",
+      "LLUMBRICALGyroY5IMdegsec"
+    ],
+    "sha256": "6da3151078341106253d89d7c64948bcce1f527621703c2df594cfa5dfda8b90",
+    "sample_rate_hz": 148.14814814814252
+  },
+  "plant": {
+    "scene": "scoop_transfer",
+    "condition": "NoComp",
+    "severity": "none",
+    "tremor_scale": 0.0,
+    "particle_count": 180,
+    "physics_dt_s": 0.001,
+    "duration_s": 21.0,
+    "pickup_time_s": 11.200000000000001,
+    "unload_time_s": 15.75,
+    "spoon_world_waypoints": [
+      [
+        0.0,
+        [
+          0.075,
+          0,
+          0.155
+        ],
+        0.7,
+        "settled_source"
+      ],
+      [
+        1.05,
+        [
+          0.075,
+          0,
+          0.155
+        ],
+        0.7,
+        "above_rim_approach"
+      ],
+      [
+        3.15,
+        [
+          0.097,
+          0,
+          0.13
+        ],
+        0.7,
+        "diagonal_entry"
+      ],
+      [
+        4.55,
+        [
+          0.105,
+          0,
+          0.1145
+        ],
+        0.7,
+        "angled_scoop_sweep"
+      ],
+      [
+        6.3,
+        [
+          0.13,
+          0,
+          0.1145
+        ],
+        0.7,
+        "level_and_collect"
+      ],
+      [
+        7.700000000000001,
+        [
+          0.137,
+          0,
+          0.1058
+        ],
+        0.0,
+        "settle_in_spoon"
+      ],
+      [
+        8.049999999999999,
+        [
+          0.137,
+          0,
+          0.1058
+        ],
+        0.0,
+        "lift_from_source"
+      ],
+      [
+        11.200000000000001,
+        [
+          0.137,
+          0,
+          0.24
+        ],
+        0.0,
+        "transport_to_target"
+      ],
+      [
+        15.75,
+        [
+          0.34,
+          0,
+          0.225
+        ],
+        0.0,
+        "intentional_pitch_unload"
+      ],
+      [
+        18.375,
+        [
+          0.34,
+          0,
+          0.225
+        ],
+        0.95,
+        "unload_hold"
+      ],
+      [
+        21.0,
+        [
+          0.34,
+          0,
+          0.225
+        ],
+        0.95,
+        "unload_hold"
+      ]
+    ],
+    "contact_solref": "-100000 -900",
+    "contact_solimp": "0.90 0.98 0.0005",
+    "friction": "0.6 0.0001 0.00005",
+    "solver_iterations": 70,
+    "solver_tolerance": 1e-06,
+    "food_contact_dimensions": 3,
+    "spoon_friction": "0.2 0.0001 0.00005",
+    "source_outer_diameter_m": 0.061,
+    "source_depth_m": 0.006,
+    "table_top_height_m": 0.1,
+    "table_front_edge_x_m": 0.095,
+    "spoon_center_thickness_m": 0.0012,
+    "spoon_rim_thickness_m": 0.0003,
+    "handle_drive": "dynamic_handle_welded_to_mocap_target",
+    "weld_solref": "0.002 1",
+    "weld_torque_scale": 1.0,
+    "joint_kp": [
+      5.0,
+      5.0
+    ],
+    "joint_kd": [
+      0.095,
+      0.027
+    ],
+    "joint_limits_rad": [
+      [
+        -0.785398,
+        0.785398
+      ],
+      [
+        -0.785398,
+        0.785398
+      ]
+    ],
+    "torque_limits_Nm": [
+      [
+        -0.15,
+        0.15
+      ],
+      [
+        -0.15,
+        0.15
+      ]
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "protocol": "scoop_baseline_v3",
+    "development_seeds": [
+      0,
+      1
+    ],
+    "source_inner_diameter_m": 0.055,
+    "source_floor_height_m": 0.104,
+    "source_shape": "flat base and 12 shallow wall boxes",
+    "particle_radius_m": 0.002,
+    "particle_mass_kg": 3.69e-05,
+    "particle_settling_duration_s": 1.6,
+    "reference_motion_time_scale": 1.75,
+    "files_sha256": {
+      "gimbal/system_benchmark_scenes.py": "1b9c818a64568a8d80187b97b5fcabd29ef8a1884831bd884fdd701af0b83a91",
+      "gimbal/system_benchmark_viewer.py": "02636e45e06299315d43d1629983c793cb2d74b3fda18839c56da6fafa882e6e",
+      "gimbal/system_benchmark.py": "cf367f4bcb63238345002e2a424aba27b57b71e325ade937479f7fcc795f8d7e",
+      "models/system_benchmark_spoon.xml": "af2ab604a429bd71993169d8ab732250645b72da0b165cd76be491f20ff5316d"
+    },
+    "bowl_depth_m": 0.004
+  },
+  "methods": [
+    "NoComp",
+    "FixedBPF",
+    "ABPF",
+    "OriginalBMFLC",
+    "HuberBMFLC",
+    "DampedBMFLC",
+    "Oracle"
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "duration_s": 21.0,
+  "estimator_parameters": {
+    "fixed_bpf": {
+      "order": 4,
+      "low_hz": 3.0,
+      "high_hz": 12.0
+    },
+    "abpf": {
+      "modal_frequency_hz_from_raw_0_15s": [
+        4.600460046004426,
+        8.53418675200821
+      ],
+      "frequency_step_hz": 0.1,
+      "limit_offset_hz": 1.5
+    },
+    "bmflc": {
+      "frequency_band_hz": [
+        3.0,
+        12.0
+      ],
+      "spacing_hz": 0.1,
+      "lms_gain": 0.01,
+      "bias_included_but_excluded_from_tremor_output": true
+    },
+    "huber": {
+      "delta_deg_s": [
+        8.879846408679843,
+        9.820875286357424
+      ],
+      "rule": "0.5 times per-axis raw 3-12 Hz RMS from independent 0-15 s calibration"
+    }
+  },
+  "damped_bmflc": {
+    "eta": 0.02,
+    "lambda_ref": 0.99999,
+    "reference_fs_hz": 1000.0,
+    "kdmp": 350.0,
+    "xdmp_rad_s": 0.009
+  },
+  "interface": {
+    "input": "actual world gyro -> exact instantaneous derivative of measured RxRy roll/pitch coordinates, deg/s",
+    "gyro_frames": "mj_objectVelocity world angular velocity; full 3D gyro logged",
+    "true_system_disturbance": "actual projected handle angular rate minus known prescribed voluntary angular rate",
+    "oracle": "perfect present system-disturbance rate, sampled/held/integrated identically to estimators",
+    "command_proxy": "recorded 3-12 Hz gyro proxy; angle offset removed so command disturbance starts at zero",
+    "integration": "zero initial correction; common causal trapezoidal integration at 1 kHz; no leakage or final phase alignment",
+    "reference": "actual projected handle angles minus integrated estimate; preserve residual unactuated orientation",
+    "initial_bias": "common zero correction; small settled drive bias is not removed by an oracle-only angle anchor",
+    "note": "system disturbance includes physical drive/contact tracking errors; not an isolated physiological tremor label"
+  },
+  "sampling": {
+    "estimator_hz": 148.14814814814252,
+    "physics_hz": 1000.0,
+    "logging_hz": 100.0,
+    "replay_hz": 50.0
+  },
+  "source_proxy_is_not_physiological_ground_truth": true,
+  "tremor_envelope": {
+    "onset_s": 11.200000000000001,
+    "ramp_s": 0.5,
+    "compensation_enabled_from_s": 11.200000000000001,
+    "definition": "all-task if onset is null; otherwise shared NoComp scoop before checkpoint, then quintic tremor ramp and enable compensation; identical initial transport load, no method-specific gate"
+  },
+  "code_sha256": {
+    "gimbal/system_benchmark_corrected.py": "11e647845f3a8c684a28cc508a169da79bba08803bba95ab67b526d6b4df495e",
+    "gimbal/system_benchmark_scenes.py": "a42419183644016cc5db14f9527ac599bcbb5fbe3dd841e4b808b5a84d4d3508",
+    "gimbal/control.py": "1e0162c8f753411ad35136cf9c077830a0829803e61ea8b8fbc6210105214645",
+    "gimbal/kinematics.py": "06b8ebdf53ff2fcf529e3795770e43bbd3805954623328a4720d15c6eb6ca4af",
+    "gimbal/system_benchmark_phase2a.py": "77a031310fe37f8484bd55759e22a58e9050c67aea93060c1b56f6147a372b30",
+    "analysis/tremor_baselines/abpf.py": "bc01d408ded7e4d7902d87f237093df1466ae2df3acc343a77a79504fddf0e07",
+    "analysis/tremor_baselines/bmflc_core.py": "0b527dcadc1eb1096938af0008a569bcb78c336b4c5b7b41026c1372d9f7eed2",
+    "analysis/tremor_baselines/round3_variants.py": "140850041f6eaad3864921ded3d42a9ea851962a90a983c559b6d483d496bbeb",
+    "analysis/tremor_baselines/damped_bmflc.py": "91acfb862edcebcf59499239304cd05b703f4f04393fa9963bebc9b3f700e3f0",
+    "analysis/tremor_baselines/butterworth.py": "c4e6491720fa13a25282543008ed199285528883b080c114f3c17d43d15e4a7b"
+  },
+  "fingerprint": "bd36819829b93f150c1e136b850154552c31c001397f7b0ef648732ff69f19f2"
+}

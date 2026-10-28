@@ -1,0 +1,211 @@
+{
+  "checked_cases": [
+    {
+      "case": "steady_moderate_FixedBPF_rho1",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "steady_moderate_ABPF_rho1",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "steady_moderate_OriginalBMFLC_rho1",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "steady_moderate_HuberBMFLC_rho1",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "steady_moderate_DampedBMFLC_rho1",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "fast_transition_moderate_FixedBPF_rho1",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "fast_transition_moderate_ABPF_rho1",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "fast_transition_moderate_OriginalBMFLC_rho1",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "fast_transition_moderate_HuberBMFLC_rho1",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "fast_transition_moderate_DampedBMFLC_rho1",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_FixedBPF_rho0.5",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_ABPF_rho0.5",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_OriginalBMFLC_rho0.5",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_HuberBMFLC_rho0.5",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_DampedBMFLC_rho0.5",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_FixedBPF_rho1",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_ABPF_rho1",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_OriginalBMFLC_rho1",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_HuberBMFLC_rho1",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_DampedBMFLC_rho1",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_FixedBPF_rho2",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_ABPF_rho2",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_OriginalBMFLC_rho2",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_HuberBMFLC_rho2",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_DampedBMFLC_rho2",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_FixedBPF_rho4",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_ABPF_rho4",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_OriginalBMFLC_rho4",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_HuberBMFLC_rho4",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_DampedBMFLC_rho4",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_FixedBPF_rho8",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_ABPF_rho8",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_OriginalBMFLC_rho8",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_HuberBMFLC_rho8",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_DampedBMFLC_rho8",
+      "historical_output_checked": false,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_FixedBPF_rho16",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_ABPF_rho16",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_OriginalBMFLC_rho16",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_HuberBMFLC_rho16",
+      "historical_output_checked": true,
+      "finite_output": true
+    },
+    {
+      "case": "amplitude_ratio_moderate_DampedBMFLC_rho16",
+      "historical_output_checked": true,
+      "finite_output": true
+    }
+  ],
+  "nrmse_agrees_with_historical_tables": true,
+  "corrections": [
+    "Fourier bias removed exactly once; retain 182 components",
+    "Damped native rad/s Fourier weights converted to deg/s before diagnostic comparisons"
+  ],
+  "no_new_data_or_parameter_selection": true,
+  "lag_alignment_applied": false
+}

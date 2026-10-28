@@ -1,0 +1,83 @@
+{
+  "version": "course_delivery_v1",
+  "recommended_method": "ABPF",
+  "methods": [
+    "FixedBPF",
+    "ABPF",
+    "OriginalBMFLC",
+    "HuberBMFLC",
+    "DampedBMFLC"
+  ],
+  "sample_rate_hz": 148.14814814814252,
+  "axes": 2,
+  "unit": "deg/s",
+  "low_hz": 3.0,
+  "high_hz": 12.0,
+  "spacing_hz": 0.1,
+  "bpf_order": 4,
+  "lms_gain": 0.01,
+  "modal_frequency_hz": [
+    4.600460046004426,
+    8.53418675200821
+  ],
+  "frequency_step_hz": 0.1,
+  "limit_offset_hz": 1.5,
+  "huber_delta_deg_s": [
+    8.879846408679843,
+    9.820875286357424
+  ],
+  "damped_eta": 0.02,
+  "damped_lambda_ref": 0.99999,
+  "damped_reference_fs_hz": 1000.0,
+  "damped_kdmp": 350.0,
+  "damped_xdmp_rad_s": 0.009,
+  "calibration_note": "Reference p03_2 independent 0–15 s; demonstration parameters, not automatically calibrated for another person/device",
+  "system": {
+    "source_root": "experiments/results/system_benchmark/geometry_sensitivity/depth4mm/transport_onset_v2_matched_load",
+    "alpha": 5.0,
+    "bowl_depth_m": 0.004,
+    "tremor_onset_s": 11.200000000000001,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "development_seeds": [
+      0,
+      1,
+      2
+    ],
+    "validation_seeds": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "all_methods": [
+      "NoComp",
+      "FixedBPF",
+      "ABPF",
+      "OriginalBMFLC",
+      "HuberBMFLC",
+      "DampedBMFLC",
+      "Oracle"
+    ]
+  },
+  "signal": {
+    "source_root": "experiments/results/final_algorithm_selection",
+    "source": "p03_1",
+    "start_s": 20.0,
+    "duration_s": 12.0,
+    "reuse_note": "Raw estimator outputs reused and verified; corrected diagnostics are separate from historical files"
+  }
+}

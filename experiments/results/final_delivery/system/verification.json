@@ -1,0 +1,53 @@
+{
+  "runs": 70,
+  "baseline_runs": 10,
+  "pairing": [
+    {
+      "seed": 0,
+      "all_seven_methods_identical_pre_onset_physics": true
+    },
+    {
+      "seed": 1,
+      "all_seven_methods_identical_pre_onset_physics": true
+    },
+    {
+      "seed": 2,
+      "all_seven_methods_identical_pre_onset_physics": true
+    },
+    {
+      "seed": 3,
+      "all_seven_methods_identical_pre_onset_physics": true
+    },
+    {
+      "seed": 4,
+      "all_seven_methods_identical_pre_onset_physics": true
+    },
+    {
+      "seed": 5,
+      "all_seven_methods_identical_pre_onset_physics": true
+    },
+    {
+      "seed": 6,
+      "all_seven_methods_identical_pre_onset_physics": true
+    },
+    {
+      "seed": 7,
+      "all_seven_methods_identical_pre_onset_physics": true
+    },
+    {
+      "seed": 8,
+      "all_seven_methods_identical_pre_onset_physics": true
+    },
+    {
+      "seed": 9,
+      "all_seven_methods_identical_pre_onset_physics": true
+    }
+  ],
+  "finite_traces": true,
+  "no_tremor_all_retained_and_transferred": true,
+  "representative_seed": 3,
+  "representative_rule": "NoComp final delivered count nearest median over ten seeds; ties lowest seed",
+  "warmup": "Same NoComp scoop; only transport onwards enables compensation",
+  "diagnostic_units": "Fourier coefficient metrics converted to deg/s; no bias components",
+  "phase_saturation": "100 Hz sampled rate, distinct from 1 kHz whole-run saturation count"
+}

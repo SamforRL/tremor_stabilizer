@@ -1,0 +1,197 @@
+{
+  "scene": "scoop_transfer",
+  "condition": "NoComp",
+  "severity": "none",
+  "tremor_scale": 0.0,
+  "particle_count": 180,
+  "physics_dt_s": 0.001,
+  "duration_s": 21.0,
+  "pickup_time_s": 11.200000000000001,
+  "unload_time_s": 15.75,
+  "spoon_world_waypoints": [
+    [
+      0.0,
+      [
+        0.075,
+        0,
+        0.155
+      ],
+      0.7,
+      "settled_source"
+    ],
+    [
+      1.05,
+      [
+        0.075,
+        0,
+        0.155
+      ],
+      0.7,
+      "above_rim_approach"
+    ],
+    [
+      3.15,
+      [
+        0.097,
+        0,
+        0.13
+      ],
+      0.7,
+      "diagonal_entry"
+    ],
+    [
+      4.55,
+      [
+        0.105,
+        0,
+        0.1145
+      ],
+      0.7,
+      "angled_scoop_sweep"
+    ],
+    [
+      6.3,
+      [
+        0.13,
+        0,
+        0.1145
+      ],
+      0.7,
+      "level_and_collect"
+    ],
+    [
+      7.700000000000001,
+      [
+        0.137,
+        0,
+        0.1058
+      ],
+      0.0,
+      "settle_in_spoon"
+    ],
+    [
+      8.049999999999999,
+      [
+        0.137,
+        0,
+        0.1058
+      ],
+      0.0,
+      "lift_from_source"
+    ],
+    [
+      11.200000000000001,
+      [
+        0.137,
+        0,
+        0.24
+      ],
+      0.0,
+      "transport_to_target"
+    ],
+    [
+      15.75,
+      [
+        0.34,
+        0,
+        0.225
+      ],
+      0.0,
+      "intentional_pitch_unload"
+    ],
+    [
+      18.375,
+      [
+        0.34,
+        0,
+        0.225
+      ],
+      0.95,
+      "unload_hold"
+    ],
+    [
+      21.0,
+      [
+        0.34,
+        0,
+        0.225
+      ],
+      0.95,
+      "unload_hold"
+    ]
+  ],
+  "contact_solref": "-100000 -900",
+  "contact_solimp": "0.90 0.98 0.0005",
+  "friction": "0.6 0.0001 0.00005",
+  "solver_iterations": 70,
+  "solver_tolerance": 1e-06,
+  "food_contact_dimensions": 3,
+  "spoon_friction": "0.2 0.0001 0.00005",
+  "source_outer_diameter_m": 0.061,
+  "source_depth_m": 0.006,
+  "table_top_height_m": 0.1,
+  "table_front_edge_x_m": 0.095,
+  "spoon_center_thickness_m": 0.0012,
+  "spoon_rim_thickness_m": 0.0003,
+  "handle_drive": "dynamic_handle_welded_to_mocap_target",
+  "weld_solref": "0.002 1",
+  "weld_torque_scale": 1.0,
+  "joint_kp": [
+    5.0,
+    5.0
+  ],
+  "joint_kd": [
+    0.095,
+    0.027
+  ],
+  "joint_limits_rad": [
+    [
+      -0.785398,
+      0.785398
+    ],
+    [
+      -0.785398,
+      0.785398
+    ]
+  ],
+  "torque_limits_Nm": [
+    [
+      -0.15,
+      0.15
+    ],
+    [
+      -0.15,
+      0.15
+    ]
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "protocol": "scoop_baseline_v3",
+  "development_seeds": [
+    0,
+    1
+  ],
+  "source_inner_diameter_m": 0.055,
+  "source_floor_height_m": 0.104,
+  "source_shape": "flat base and 12 shallow wall boxes",
+  "particle_radius_m": 0.002,
+  "particle_mass_kg": 3.69e-05,
+  "particle_settling_duration_s": 1.6,
+  "reference_motion_time_scale": 1.75,
+  "files_sha256": {
+    "gimbal/system_benchmark_scenes.py": "1b9c818a64568a8d80187b97b5fcabd29ef8a1884831bd884fdd701af0b83a91",
+    "gimbal/system_benchmark_viewer.py": "02636e45e06299315d43d1629983c793cb2d74b3fda18839c56da6fafa882e6e",
+    "gimbal/system_benchmark.py": "cf367f4bcb63238345002e2a424aba27b57b71e325ade937479f7fcc795f8d7e",
+    "models/system_benchmark_spoon.xml": "af2ab604a429bd71993169d8ab732250645b72da0b165cd76be491f20ff5316d"
+  }
+}

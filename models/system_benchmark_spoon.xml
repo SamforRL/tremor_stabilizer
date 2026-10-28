@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujoco model="system_benchmark_loaded_spoon">
+  <!-- World and neutral CAD assembly frames agree: X follows the handle,
+       Y points across the fork, and Z completes the right-handed frame.
+       Source STEP coordinates are millimetres; mesh vertices are scaled to m. -->
+  <compiler angle="radian" meshdir="cad_spoon/meshes"/>
+  <option timestep="0.001" gravity="0 0 -9.81" integrator="implicitfast" cone="elliptic" iterations="80" tolerance="1e-10"/>
+  <default>
+    <geom contype="0" conaffinity="0" group="1"/>
+  </default>
+
+  <asset>
+    <mesh name="spoon_mount84" file="part_000_spoon_mount84.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="spoon_mount92" file="part_001_spoon_mount92.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="spoon_adapter_upper" file="part_002_s_adapter_spoon_upper.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="spoon_adapter_lower" file="part_003_s_adapter_spoon_lower.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="spoon_head" file="part_004_spoon_head.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="handle_upper" file="part_005_h_upper.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="handle_lower" file="part_006_h_lower.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="roll_cover_upper" file="part_007_s_symmetric_spoon_upper.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="roll_cover_lower" file="part_008_s_symmetric_spoon_lower.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="fork" file="part_009_m_fork.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="counterweight" file="part_010_m_counterweight.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="pitch_cover_negative" file="part_011_v2_pitch_cover__1.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="passive_shaft" file="part_012_m_passive_shaft.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="pitch_cover_positive" file="part_013_v2_pitch_cover_1.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="quick_release" file="part_014_m_quick_release.stl" scale="0.001 0.001 0.001"/>
+    <mesh name="spoon_holder" file="part_015_tool_spoon.stl" scale="0.001 0.001 0.001"/>
+  </asset>
+
+  <worldbody>
+    <light name="key" pos="0 0 1.5" dir="0 0 -1" diffuse="0.9 0.9 0.9"/>
+    <geom name="floor" type="plane" pos="0 0 0" size="2 2 0.1" contype="4" conaffinity="2" group="3" rgba="0.88 0.89 0.91 1" friction="0.8 0.01 0.001"/>
+    <body name="target_cup" pos="0.34 0 0">
+      <geom name="cup_bottom" type="box" pos="0 0 0.105" size="0.060 0.060 0.004" contype="4" conaffinity="2" group="3" rgba="0.20 0.45 0.80 0.38" friction="0.8 0.01 0.001"/>
+      <geom name="cup_wall_xn" type="box" pos="-0.063 0 0.155" size="0.003 0.063 0.05" contype="4" conaffinity="2" group="3" rgba="0.20 0.45 0.80 0.38"/>
+      <geom name="cup_wall_xp" type="box" pos="0.063 0 0.155" size="0.003 0.063 0.05" contype="4" conaffinity="2" group="3" rgba="0.20 0.45 0.80 0.38"/>
+      <geom name="cup_wall_yn" type="box" pos="0 -0.063 0.155" size="0.060 0.003 0.05" contype="4" conaffinity="2" group="3" rgba="0.20 0.45 0.80 0.38"/>
+      <geom name="cup_wall_yp" type="box" pos="0 0.063 0.155" size="0.060 0.003 0.05" contype="4" conaffinity="2" group="3" rgba="0.20 0.45 0.80 0.38"/>
+    </body>
+    <!-- Fixed world reference used by the weighted tip-position experiment. -->
+    <site name="neutral_tip_target" pos="0.154 0 0" size="0.004" rgba="0.75 0 0.8 0.8"/>
+    <!-- Set data.mocap_pos[0] and data.mocap_quat[0] to drive the handle. -->
+    <body name="handle" mocap="true">
+      <geom name="handle_upper_visual" type="mesh" mesh="handle_upper"/>
+      <geom name="handle_lower_visual" type="mesh" mesh="handle_lower"/>
+      <site name="handle_frame" pos="0 0 0" size="0.002" rgba="0.1 0.3 1 1"/>
+
+      <!-- Roll axis from rm_shaft CAD cylinder: (6.02, 0, 0) mm, along X. -->
+      <body name="roll_frame" pos="0.00602 0 0">
+        <joint name="roll" type="hinge" axis="1 0 0" range="-0.785398 0.785398"
+               damping="0.002" armature="0.00001" solreflimit="0.002 1"/>
+        <!-- Uniform-density CAD inertia rescaled to assumed 0.11 kg. -->
+        <inertial pos="0.04427256 -0.00383813 0.00015151" mass="0.11"
+                  fullinertia="0.000376574572 0.0000691934918 0.000430417759 0.0000095097463 -0.000000504899006 -0.0000000639433921"/>
+        <geom name="roll_cover_upper_visual" type="mesh" mesh="roll_cover_upper" pos="-0.00602 0 0"/>
+        <geom name="roll_cover_lower_visual" type="mesh" mesh="roll_cover_lower" pos="-0.00602 0 0"/>
+        <geom name="fork_visual" type="mesh" mesh="fork" pos="-0.00602 0 0"/>
+        <geom name="counterweight_visual" type="mesh" mesh="counterweight" pos="-0.00602 0 0"/>
+        <geom name="pitch_cover_negative_visual" type="mesh" mesh="pitch_cover_negative" pos="-0.00602 0 0"/>
+        <geom name="pitch_cover_positive_visual" type="mesh" mesh="pitch_cover_positive" pos="-0.00602 0 0"/>
+        <site name="roll_axis_origin" pos="0 0 0" size="0.002" rgba="1 0.3 0.2 1"/>
+
+        <!-- Pitch axis from pm_shaft CAD cylinder: (73, 46, 0) mm, along Y.
+             The same line passes through (73, 0, 0) mm. -->
+        <body name="pitch_frame" pos="0.06698 0 0">
+          <joint name="pitch" type="hinge" axis="0 1 0" range="-0.785398 0.785398"
+                 damping="0.001" armature="0.000005" solreflimit="0.002 1"/>
+          <!-- Uniform-density CAD inertia rescaled to assumed 0.06 kg. -->
+          <inertial pos="0.01233328 0.00199499 0.00078597" mass="0.06"
+                    fullinertia="0.0000568080734 0.0000219952758 0.0000739035275 0.00000173508769 0.00000143670662 0.000000534297475"/>
+          <geom name="passive_shaft_visual" type="mesh" mesh="passive_shaft" pos="-0.073 0 0"/>
+          <geom name="quick_release_visual" type="mesh" mesh="quick_release" pos="-0.073 0 0"/>
+          <geom name="spoon_holder_visual" type="mesh" mesh="spoon_holder" pos="-0.073 0 0"/>
+          <geom name="spoon_adapter_upper_visual" type="mesh" mesh="spoon_adapter_upper" pos="-0.073 0 0"/>
+          <geom name="spoon_adapter_lower_visual" type="mesh" mesh="spoon_adapter_lower" pos="-0.073 0 0"/>
+          <geom name="spoon_mount84_visual" type="mesh" mesh="spoon_mount84" pos="-0.073 0 0"/>
+          <geom name="spoon_mount92_visual" type="mesh" mesh="spoon_mount92" pos="-0.073 0 0"/>
+          <geom name="spoon_head_visual" type="mesh" mesh="spoon_head" pos="-0.073 0 0"/>
+          <site name="tool_frame" pos="0.03 0 0" size="0.002" rgba="0 0.8 0.2 1"/>
+          <site name="spoon_tip" pos="0.081 0 0" size="0.003" rgba="1 0.2 0.2 1"/>
+        <!-- Simplified collision tray in place of complex CAD bowl contact. -->
+        <geom name="bowl_floor_proxy" type="box" pos="0.064 0 -0.0015" size="0.024 0.020 0.0015" contype="1" conaffinity="2" group="3" rgba="0.95 0.72 0.25 0.32" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+        <geom name="bowl_wall_xn" type="box" pos="0.040 0 0.0035" size="0.0015 0.020 0.005" contype="1" conaffinity="2" group="3" rgba="0.95 0.72 0.25 0.32" friction="0.8 0.01 0.001" condim="3"/>
+        <geom name="bowl_wall_xp" type="box" pos="0.088 0 0.0035" size="0.0015 0.020 0.005" contype="1" conaffinity="2" group="3" rgba="0.95 0.72 0.25 0.32" friction="0.8 0.01 0.001" condim="3"/>
+        <geom name="bowl_wall_yn" type="box" pos="0.064 -0.020 0.0035" size="0.024 0.0015 0.005" contype="1" conaffinity="2" group="3" rgba="0.95 0.72 0.25 0.32" friction="0.8 0.01 0.001" condim="3"/>
+        <geom name="bowl_wall_yp" type="box" pos="0.064 0.020 0.0035" size="0.024 0.0015 0.005" contype="1" conaffinity="2" group="3" rgba="0.95 0.72 0.25 0.32" friction="0.8 0.01 0.001" condim="3"/>
+        </body>
+      </body>
+    </body>
+      <body name="food_00" pos="0 0 0">
+      <freejoint name="food_00_free"/>
+      <geom name="food_00_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_01" pos="0 0 0">
+      <freejoint name="food_01_free"/>
+      <geom name="food_01_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_02" pos="0 0 0">
+      <freejoint name="food_02_free"/>
+      <geom name="food_02_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_03" pos="0 0 0">
+      <freejoint name="food_03_free"/>
+      <geom name="food_03_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_04" pos="0 0 0">
+      <freejoint name="food_04_free"/>
+      <geom name="food_04_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_05" pos="0 0 0">
+      <freejoint name="food_05_free"/>
+      <geom name="food_05_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_06" pos="0 0 0">
+      <freejoint name="food_06_free"/>
+      <geom name="food_06_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_07" pos="0 0 0">
+      <freejoint name="food_07_free"/>
+      <geom name="food_07_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_08" pos="0 0 0">
+      <freejoint name="food_08_free"/>
+      <geom name="food_08_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_09" pos="0 0 0">
+      <freejoint name="food_09_free"/>
+      <geom name="food_09_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_10" pos="0 0 0">
+      <freejoint name="food_10_free"/>
+      <geom name="food_10_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_11" pos="0 0 0">
+      <freejoint name="food_11_free"/>
+      <geom name="food_11_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_12" pos="0 0 0">
+      <freejoint name="food_12_free"/>
+      <geom name="food_12_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_13" pos="0 0 0">
+      <freejoint name="food_13_free"/>
+      <geom name="food_13_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_14" pos="0 0 0">
+      <freejoint name="food_14_free"/>
+      <geom name="food_14_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_15" pos="0 0 0">
+      <freejoint name="food_15_free"/>
+      <geom name="food_15_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_16" pos="0 0 0">
+      <freejoint name="food_16_free"/>
+      <geom name="food_16_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_17" pos="0 0 0">
+      <freejoint name="food_17_free"/>
+      <geom name="food_17_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_18" pos="0 0 0">
+      <freejoint name="food_18_free"/>
+      <geom name="food_18_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_19" pos="0 0 0">
+      <freejoint name="food_19_free"/>
+      <geom name="food_19_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_20" pos="0 0 0">
+      <freejoint name="food_20_free"/>
+      <geom name="food_20_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_21" pos="0 0 0">
+      <freejoint name="food_21_free"/>
+      <geom name="food_21_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_22" pos="0 0 0">
+      <freejoint name="food_22_free"/>
+      <geom name="food_22_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_23" pos="0 0 0">
+      <freejoint name="food_23_free"/>
+      <geom name="food_23_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_24" pos="0 0 0">
+      <freejoint name="food_24_free"/>
+      <geom name="food_24_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_25" pos="0 0 0">
+      <freejoint name="food_25_free"/>
+      <geom name="food_25_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_26" pos="0 0 0">
+      <freejoint name="food_26_free"/>
+      <geom name="food_26_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_27" pos="0 0 0">
+      <freejoint name="food_27_free"/>
+      <geom name="food_27_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_28" pos="0 0 0">
+      <freejoint name="food_28_free"/>
+      <geom name="food_28_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+    <body name="food_29" pos="0 0 0">
+      <freejoint name="food_29_free"/>
+      <geom name="food_29_geom" type="sphere" size="0.0032" mass="0.00015" contype="2" conaffinity="7" group="2" rgba="0.96 0.58 0.18 1" friction="0.8 0.01 0.001" condim="3" solref="0.003 1"/>
+    </body>
+  </worldbody>
+
+  <!-- gear=1 maps control input directly to joint torque in N m. -->
+  <actuator>
+    <motor name="roll_torque" joint="roll" gear="1" ctrllimited="true" ctrlrange="-0.15 0.15"/>
+    <motor name="pitch_torque" joint="pitch" gear="1" ctrllimited="true" ctrlrange="-0.15 0.15"/>
+  </actuator>
+
+  <!-- Ideal ground-truth observations; no IMU model or noise yet. -->
+  <sensor>
+    <jointpos name="roll_position" joint="roll"/>
+    <jointvel name="roll_velocity" joint="roll"/>
+    <jointpos name="pitch_position" joint="pitch"/>
+    <jointvel name="pitch_velocity" joint="pitch"/>
+    <framequat name="handle_orientation" objtype="body" objname="handle"/>
+    <framequat name="tool_orientation" objtype="body" objname="pitch_frame"/>
+    <framepos name="spoon_tip_position" objtype="site" objname="spoon_tip"/>
+  </sensor>
+</mujoco>
