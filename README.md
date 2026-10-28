@@ -1,5 +1,11 @@
 # Tremor Stabilizer — 课设交付版
 
+## 完整交付包
+
+[**下载完整交付版 ZIP**](https://github.com/SamforRL/tremor_stabilizer/archive/ee47075717a560785ed79b2b23e098af86ac540a.zip) · [浏览完整分支](https://github.com/SamforRL/tremor_stabilizer/tree/full-delivery-v1)
+
+包含全部种子的逐帧数据、完整实验材料和两段视频；主分支仍为精简运行版。下载解压后，从工程根目录按下方命令运行。
+
 MuJoCo两自由度主动稳勺：五种因果震颤估计器、信号对比结果、浅勺颗粒运输与倾倒实验。
 默认使用 **ABPF**，保留Huber-BMFLC作为强主动干扰下的备选。
 
