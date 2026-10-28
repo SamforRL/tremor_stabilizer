@@ -1,8 +1,0 @@
-__pycache__/
-*.pyc
-.venv/
-Dataset/
-.tools/
-.env
-dist/
-experiments/results/final_delivery/reproduction_system/

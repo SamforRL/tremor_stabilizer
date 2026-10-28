@@ -1,61 +1,63 @@
-# Tremor Stabilizer — 课设交付版
+# Tremor Stabilizer：课设交付版 v1
 
-MuJoCo两自由度主动稳勺：五种因果震颤估计器、信号对比结果、浅勺颗粒运输与倾倒实验。
-默认使用 **ABPF**，保留Huber-BMFLC作为强主动干扰下的备选。
+本工程交付：**五个因果震颤估计器、可追溯的信号对比数据、MuJoCo两自由度浅勺颗粒运输/倾倒实验**。
+默认算法为ABPF，HuberBMFLC保留为备选；所有正式参数和工况冻结。
 
-## 看效果
+## 快速开始
 
-- [无补偿视频](MuJoCo_NoComp.mp4)
-- [ABPF补偿视频](MuJoCo_ABPF.mp4)
-
-同一seed、同一摄像机，21秒。前11.2秒共同舀取，随后平滑加入震颤并启用补偿。
-
-## 运行
-
-Python 3.11；从仓库根目录执行：
+从工程根目录运行，Python 3.11。当前本机环境为`me5418`，新环境按`requirements.txt`安装。
 
 ```bash
-python -m pip install -r requirements.txt
+conda activate me5418
 python -m delivery check
+python -m delivery demo
+# 相同seed、同一原生MuJoCo摄像机
 python -m delivery view --method NoComp
 python -m delivery view --method ABPF
 ```
 
-视窗需要桌面OpenGL。支持 `--speed 0.5`；仓库提供全部七方法的同一代表seed=3回放。
-重新仿真：`OPENBLAS_NUM_THREADS=1 python -m delivery system --workers 4`，结果存入独立目录，不覆盖交付数据。
+先完成约11秒相同舀取，再平滑加入震颤，比较运输/倾倒效果。窗口需桌面OpenGL；其余检查和出图可无窗口运行。
+可加`--speed 0.5`或`--seed 3`。可选方法为NoComp、FixedBPF、ABPF、OriginalBMFLC、HuberBMFLC、DampedBMFLC、Oracle。
 
-## 调用算法
+## 交付内容
+
+| 内容 | 入口 |
+|---|---|
+| 队友调用、单位、校准、重跑说明 | [delivery/README.md](delivery/README.md) |
+| 公共算法API（仅依赖NumPy） | [gimbal/estimators.py](gimbal/estimators.py) |
+| 冻结参数 | [delivery/config.json](delivery/config.json) |
+| 最终实验报告 | [课设交付实验报告](reports/final_delivery/课设交付实验报告.md) |
+| 信号图：估计、主动重建、PSD、rho、污染 | [signal_figures](reports/final_delivery/signal_figures/) |
+| 系统图：保持/转移、姿态、控制代价 | [system_figures](reports/final_delivery/system_figures/) |
+| 汇总与逐次数据 | [final_delivery](experiments/results/final_delivery/) |
+| 数据/代码校验 | [delivery/manifest.json](delivery/manifest.json) |
+
+## 在线调用示例
 
 ```python
 from gimbal.estimators import EstimatorConfig, create_estimator
-est = create_estimator("ABPF", EstimatorConfig.reference(unit="rad/s"))
-est.reset()  # 每条独立记录开始时调用
-estimated_tremor, diagnostics = est.step([0.1, -0.05])
+
+# 仿真参考标定。自有硬件请显式提供自己的Fs、轴数、单位及独立校准参数。
+config = EstimatorConfig.reference(unit="rad/s")
+estimator = create_estimator("ABPF", config)
+estimator.reset()
+estimated_tremor, diagnostics = estimator.step([0.1, -0.05])
 ```
 
-可选 FixedBPF、ABPF、OriginalBMFLC、HuberBMFLC、DampedBMFLC。算法调用只依赖NumPy，输入/输出为相同单位的角速度、shape=(axes,)。
-参考配置使用148.148Hz及独立p03_2校准；自有设备需用EstimatorConfig显式提供Fs、轴数、单位和标定，不能直接照搬患者参数。
+输入/输出均为角速度，shape=(axes,)。不在每个sample重置，不把算法输出直接当作角度或关节命令。
 
-## 结果
+## 维护与复现
 
-| 方法 | 运输保持率 | 最终转移率 | 主动倾倒RMSE |
-|---|---:|---:|---:|
-| NoComp | 36.8% | 56.4% | 2.32° |
-| FixedBPF | 78.0% | 89.2% | 1.85° |
-| **ABPF** | **99.7%** | **100%** | **0.96°** |
-| OriginalBMFLC | 9.8% | 10.4% | 9.17° |
-| HuberBMFLC | 97.6% | 99.0% | 5.37° |
-| DampedBMFLC | 99.7% | 100% | 8.97° |
-| Oracle | 100% | 100% | 0.80° |
+```bash
+# 整理已保存证据、核对历史信号输出、重画图；不重跑MuJoCo
+python -m delivery build
+# 在新目录重跑全部物理实验（保留交付结果）
+OPENBLAS_NUM_THREADS=1 python -m delivery system --workers 4
+# 生成可直接转交队友的白名单移交包
+python -m delivery package
+```
 
-主表为未参与工况选择的7个种子（3–9）；0–2用于NoComp/Oracle工况开发，所有10种子的完整指标均保留。
-原始算法参数未按最终结果调整。ABPF与Damped转移率接近，但ABPF主动倾倒误差更小。
-
-- [最终汇总CSV](experiments/results/final_delivery/final_summary.csv)
-- [信号指标与快动作/rho实验](experiments/results/final_delivery/signals/metrics.csv)
-- [系统逐次指标](experiments/results/final_delivery/system/per_run_metrics.csv) · [汇总](experiments/results/final_delivery/system/aggregate_metrics.csv)
-- [信号对比图](reports/final_delivery/signal_figures/) · [系统图](reports/final_delivery/system_figures/)
-
-分母是实际舀起的颗粒数，不是180粒源容器库存。离勺颗粒仍可能进入目标，因此运输保持率和最终转移率分开报告。
-信号对比沿用冻结记录代理与已设计主动信号；记录代理不是纯生理震颤标签。Original稳态精度更高，Huber在极高rho更稳，ABPF并非所有信号工况第一。
-本场景是已知时序的等装载运输诊断、单一记录来源；种子是颗粒初态而非受试者。不能据此推断临床效果或跨人群最优。
+正式主表采用独立验证种子3–9；0–2仅用于NoComp/Oracle工况开发。
+该场景是等装载运输诊断，不能代替全程震颤进食验证。当前单来源工况支持工程选型，不宣称跨人群最优。
+完整历史代码和结果保留；旧模型的系统排名不与最终场景合并。历史说明见[历史存档](reports/history/工程历史说明.md)。
+`AGENTS.md`保留早期设计边界，其中Phase 1目标已完成；本次交付工作遵循后续已授权的算法比较和系统功能验证任务。

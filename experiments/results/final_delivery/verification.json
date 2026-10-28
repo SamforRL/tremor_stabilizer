@@ -1,0 +1,59 @@
+{
+  "passed": true,
+  "python": "3.11.16",
+  "dependencies": {
+    "numpy": "2.4.6",
+    "mujoco": "3.10.0",
+    "matplotlib": "3.11.2"
+  },
+  "estimator_checks": [
+    {
+      "method": "FixedBPF",
+      "finite_dimensions": true,
+      "reset": true,
+      "causal_prefix": true,
+      "exact_legacy_output": true,
+      "degree_radian_equivalence": true,
+      "one_three_axes": true
+    },
+    {
+      "method": "ABPF",
+      "finite_dimensions": true,
+      "reset": true,
+      "causal_prefix": true,
+      "exact_legacy_output": true,
+      "degree_radian_equivalence": true,
+      "one_three_axes": true
+    },
+    {
+      "method": "OriginalBMFLC",
+      "finite_dimensions": true,
+      "reset": true,
+      "causal_prefix": true,
+      "exact_legacy_output": true,
+      "degree_radian_equivalence": true,
+      "one_three_axes": true
+    },
+    {
+      "method": "HuberBMFLC",
+      "finite_dimensions": true,
+      "reset": true,
+      "causal_prefix": true,
+      "exact_legacy_output": true,
+      "degree_radian_equivalence": true,
+      "one_three_axes": true
+    },
+    {
+      "method": "DampedBMFLC",
+      "finite_dimensions": true,
+      "reset": true,
+      "causal_prefix": true,
+      "exact_legacy_output": true,
+      "degree_radian_equivalence": true,
+      "one_three_axes": true
+    }
+  ],
+  "kinematics": true,
+  "shallow_model_compiled": true,
+  "verified_manifest_files": 350
+}
